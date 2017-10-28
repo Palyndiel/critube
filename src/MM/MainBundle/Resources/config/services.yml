@@ -34,16 +34,16 @@ services:
     tags:
       - { name: form.type, alias: ckeditor }
 
-  mm_main.beta.html_adder:
-    class: MM\MainBundle\Beta\BetaHTMLAdder
-
-  mm_main.beta.listener:
-    class: MM\MainBundle\Beta\BetaListener
-    arguments:
-      - "@mm_main.beta.html_adder"
-      - "2016-06-01"
-    tags:
-      - { name: kernel.event_listener, event: kernel.response, method: processBeta }
+#  mm_main.beta.html_adder:
+#    class: MM\MainBundle\Beta\BetaHTMLAdder
+#
+#  mm_main.beta.listener:
+#    class: MM\MainBundle\Beta\BetaListener
+#    arguments:
+#      - "@mm_main.beta.html_adder"
+#      - "2016-06-01"
+#    tags:
+#      - { name: kernel.event_listener, event: kernel.response, method: processBeta }
 
   mm_main.bigbrother.message_notificator:
     class: MM\MainBundle\Bigbrother\MessageNotificator

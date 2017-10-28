@@ -74,6 +74,6 @@ class __TwigTemplate_f08822413089a8031f6a7ea69045cd0c13381d2a30225ae287da219f0c8
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "MMMainBundle:Article:menu.html.twig", "/home/ycrpingf/public_html/src/MM/MainBundle/Resources/views/Article/menu.html.twig");
+        return new Twig_Source("", "MMMainBundle:Article:menu.html.twig", "/Users/palyndiel/PhpstormProjects/cri_tube/src/MM/MainBundle/Resources/views/Article/menu.html.twig");
     }
 }

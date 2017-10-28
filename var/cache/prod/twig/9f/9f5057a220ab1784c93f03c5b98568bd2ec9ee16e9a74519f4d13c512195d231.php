@@ -68,6 +68,6 @@ class __TwigTemplate_abd9d136c8dcffa663bf85e1d474d9a20a47baeca6e1dcb2d7cb14a3c9c
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "LiipSearchBundle:Search:search_box.html.twig", "/home/ycrpingf/public_html/vendor/liip/search-bundle/Resources/views/Search/search_box.html.twig");
+        return new Twig_Source("", "LiipSearchBundle:Search:search_box.html.twig", "/Users/palyndiel/PhpstormProjects/cri_tube/vendor/liip/search-bundle/Resources/views/Search/search_box.html.twig");
     }
 }

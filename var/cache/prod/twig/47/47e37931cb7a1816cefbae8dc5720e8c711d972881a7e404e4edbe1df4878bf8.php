@@ -325,6 +325,6 @@ class __TwigTemplate_237201e79659ecc8e26ad8b463669442394db5a1fd556ac32b8fae4ceb7
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "MMMainBundle:Article:index.html.twig", "/home/ycrpingf/public_html/src/MM/MainBundle/Resources/views/Article/index.html.twig");
+        return new Twig_Source("", "MMMainBundle:Article:index.html.twig", "/Users/palyndiel/PhpstormProjects/cri_tube/src/MM/MainBundle/Resources/views/Article/index.html.twig");
     }
 }

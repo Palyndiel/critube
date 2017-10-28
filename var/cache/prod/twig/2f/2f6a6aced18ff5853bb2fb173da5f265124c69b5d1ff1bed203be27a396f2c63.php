@@ -273,6 +273,6 @@ class __TwigTemplate_b89be93d9e71461cd420a88638486f9c9461c8bf3f6f5529224618a9ea6
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "MMCoreBundle::layout.html.twig", "/home/ycrpingf/public_html/src/MM/CoreBundle/Resources/views/layout.html.twig");
+        return new Twig_Source("", "MMCoreBundle::layout.html.twig", "/Users/palyndiel/PhpstormProjects/cri_tube/src/MM/CoreBundle/Resources/views/layout.html.twig");
     }
 }
