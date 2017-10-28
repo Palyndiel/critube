@@ -1,0 +1,11 @@
+services:
+    mm_core.email.contact_mailer:
+        class: MM\CoreBundle\Email\ContactMailer
+        arguments:
+            - "@mailer"
+    mm_core.doctrine_listener.contact_creation:
+    class: MM\CoreBundle\DoctrineListener\ContactCreationListener
+    arguments:
+      - "@mm_core.email.contact_mailer"
+    tags:
+      - { name: doctrine.event_listener, event: postPersist }

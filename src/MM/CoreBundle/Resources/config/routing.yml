@@ -1,0 +1,23 @@
+# src/OC/CoreBundle/Resources/config/routing.yml
+
+mm_core_home:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /home
+        permanent: true
+
+mm_core_contact:
+    path: /contact
+    defaults:
+        _controller: MMCoreBundle:Core:contact
+
+mm_core_about:
+    path:      /about
+    defaults:
+        _controller: MMCoreBundle:Core:about
+        
+mm_core_contact:
+    path:      /contact
+    defaults:
+        _controller: MMCoreBundle:Core:contact

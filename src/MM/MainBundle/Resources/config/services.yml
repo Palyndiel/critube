@@ -1,0 +1,64 @@
+# src/MM/MainBundle/Resources/config/services.yml
+
+services:
+  mm_main.antispam:
+    class: MM\MainBundle\Antispam\MMAntispam
+    arguments:
+      - "@mailer"
+      - 50
+    calls:
+      - [ setLocale, [%locale%] ]
+
+  mm_main.purger.article:
+    class: MM\MainBundle\Purger\ArticlePurger
+    arguments:
+      - "@doctrine.orm.entity_manager"
+
+#  mm_main.validator.antiflood:                        # Le nom du service
+#    class: MM\MainBundle\Validator\AntifloodValidator # La classe du service, ici notre validateur déjà créé
+#    arguments:                                            # Les données qu'on injecte au service : la requête et l'EntityManager
+#      - "@request_stack"
+#      - "@doctrine.orm.entity_manager"
+#    tags:
+#      - { name: validator.constraint_validator, alias: mm_main_antiflood }  # C'est avec l'alias qu'on retrouvera le service
+
+  mm_main.twig.antispam_extension:
+    class: MM\MainBundle\Twig\AntispamExtension
+    arguments:
+      - "@mm_main.antispam"
+    tags:
+      -  { name: twig.extension }
+
+  mm_main.form.ckeditor:
+    class: MM\MainBundle\Form\CkeditorType
+    tags:
+      - { name: form.type, alias: ckeditor }
+
+  mm_main.beta.html_adder:
+    class: MM\MainBundle\Beta\BetaHTMLAdder
+
+  mm_main.beta.listener:
+    class: MM\MainBundle\Beta\BetaListener
+    arguments:
+      - "@mm_main.beta.html_adder"
+      - "2016-06-01"
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: processBeta }
+
+  mm_main.bigbrother.message_notificator:
+    class: MM\MainBundle\Bigbrother\MessageNotificator
+    arguments:
+      - "@mailer"
+
+  mm_main.bigbrother.message_listener:
+    class: MM\MainBundle\Bigbrother\MessageListener
+    arguments:
+      - "@mm_main.bigbrother.message_notificator"
+      - ["alex", "marine", "pierre"]
+    tags:
+      - { name: kernel.event_listener, event: mm_main.post_message, method: processMessage }
+
+  mm_main.paramconverter.json:
+    class: MM\MainBundle\ParamConverter\JsonParamConverter
+    tags:
+      - { name: request.param_converter }

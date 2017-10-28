@@ -1,0 +1,16 @@
+{# src/MM/MainBundle/Resources/views/Article/add.html.twig #}
+
+{% extends "MMMainBundle::layout.html.twig" %}
+
+{% block body %}
+
+  <h2>Ajouter un article</h2>
+
+  {{ include("MMMainBundle:Article:form.html.twig") }}
+
+  <p>
+    Attention : cet article sera ajouté directement
+    sur la page d'accueil après validation du formulaire.
+  </p>
+
+{% endblock %}

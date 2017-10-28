@@ -1,0 +1,48 @@
+{% extends "MMCoreBundle::layout.html.twig" %}
+
+{% block title %}
+  About - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+{{ include("MMCoreBundle:Core:form.html.twig") }}
+
+{% endblock %}
+
+{% block sidebar %}
+
+<!-- Sidebar -->
+          <section id="sidebar">
+
+            <!-- Intro -->
+              <section id="intro">
+                <!-- <a href="#" class="logo"><img src="images/logo.jpg" alt="" /></a> -->
+                <header>
+                  <h2>YCR</h2>
+                  <p>Youtube Channel Reviews</a></p>
+                </header>
+              </section>
+
+            <!-- Posts List -->
+              <section>
+                <div class="mini-posts">
+                  {{ render(controller("MMMainBundle:Article:menu", {'limit': 3})) }}
+                </div>
+              </section>
+
+            <!-- Footer -->
+              <section id="footer">
+                <ul class="icons">
+                  <li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
+                  <li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
+                  <li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
+                  <li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
+                  <li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
+                </ul>
+                <p class="copyright">&copy; Palyndiel Corp.</p>
+              </section>
+
+          </section>
+
+{% endblock %}

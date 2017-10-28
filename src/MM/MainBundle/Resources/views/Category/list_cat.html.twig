@@ -1,0 +1,29 @@
+{# src/MM/MainBundle/Resources/views/Article/index.html.twig #}
+
+{% extends "MMCoreBundle::layout.html.twig" %}
+
+{% block title %}
+  Liste des catégories - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  <h2>Liste des catégories</h2>
+
+  <section>
+    <div class="mini-posts">
+      
+        {% for category in listCategories %}    
+            <article class="mini-post">
+			<header>
+				<h3><a href="{{ path('mm_main_list_by_cat', {'id': category.id}) }}">
+			        {{ category.name }}
+			      </a></h3>
+			</header>
+		</article>
+        {% endfor %}
+        
+    </div>
+  </section>
+
+{% endblock %}

@@ -1,0 +1,115 @@
+{# src/MM/MainBundle/Resources/view/Article/view.html.twig #}
+
+{% extends "MMMainBundle::layout.html.twig" %}
+
+{% block title %}
+  Lecture d'un article - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  <article class="post">
+                <header>
+                  <div class="title">
+                    <h2>{{ article.title }}</h2>
+                    <p>{{ article.resume }}</p>
+                  </div>
+                  <div class="meta">
+                    <time class="published" datetime="{{ article.date|date('d M Y') }}">{{ article.date|date('d M Y') }}</time>
+                    <a href="#" class="author"><span class="name">{{ article.author }}</span>
+                    {% if article.author.avatar is not null %}
+                  <img
+                  src="{{ asset(article.author.avatar.webPath) }}"
+                  alt="{{ article.author.avatar.alt }}"
+                  />
+               {% endif %}</a> 
+                  </div>
+                </header>
+                <a href="#" class="image featured">
+                {% if article.image is not null %}
+                  <img
+                  src="{{ asset(article.image.webPath) }}"
+                  alt="{{ article.image.alt }}"
+                  />
+               {% endif %}</a>
+                <p>{{ article.content }}</p>
+                <footer>
+                  <ul class="actions">
+                    <li><a href="{{ path('mm_main_home') }}" class="button big">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                    Retour à la liste
+                    </a></li>
+                    {% if is_granted("ROLE_AUTEUR") %}
+                    <li><a href="{{ path('mm_main_edit', {'id': article.id}) }}" class="button big">
+                      <i class="glyphicon glyphicon-edit"></i>
+                      Modifier l'article
+                    </a></li>
+                    <li><a href="{{ path('mm_main_delete', {'id': article.id}) }}" class="button big">
+                      <i class="glyphicon glyphicon-trash"></i>
+                      Supprimer l'accueil
+                    </a></li>
+                    {% endif %}
+                  </ul>
+                  <ul class="stats" ng-app="myApp">
+                      {% if not article.categories.empty %}
+                      <li>
+                      {% for category in article.categories %}
+                        {{ category.name }}{% if not loop.last %} <em>,</em> {% endif %}
+                      {% endfor %}
+                      </li>
+                      {% endif %}
+                      {% if is_granted("ROLE_USER") %}
+                          {% if not hasLiked %}
+                            <li><a id = like class="icon fa-heart" onclick="like()">{{ article.nbLikes }}</a></li>
+                          {% else %}
+                            <li><a id = like class="icon fa-heart" onclick="dislike()">{{ article.nbLikes }}</a></li>
+                          {% endif %}
+                      {% endif %}
+                    {#<li><a href="#" class="icon fa-comment">{{ thread.numComments }}</a></li>#}
+                  </ul>
+                </footer>
+              </article>
+
+    {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': article.id } %}
+
+    <script>
+        function like()
+        {
+            var DATA = 'id=' + {{ article.id }};
+            $.ajax({
+            type: "POST",
+            url: "{{ path('mm_main_addlike')}}",
+            data: DATA
+            }).done(function(data){
+                refreshLikes();
+                document.getElementById('like').onclick = function(){ dislike(); } ;
+            });
+        }
+        
+        function dislike()
+        {
+            var DATA = 'id=' + {{ article.id }};
+            $.ajax({
+            type: "POST",
+            url: "{{ path('mm_main_removelike')}}",
+            data: DATA
+            }).done(function(data){
+                refreshLikes();
+                document.getElementById('like').onclick = function(){ like(); } ;
+            });
+        }
+        
+        function refreshLikes(){
+            var DATA = 'id=' + {{ article.id }};
+            $.ajax({
+            type: "POST",
+            url: "{{ path('mm_main_getlikes')}}",
+            data: DATA
+            }).done(function(data){
+                var nbLikes = data;
+                document.getElementById('like').innerHTML = nbLikes;
+            });
+        }
+    </script>
+    
+{% endblock %}

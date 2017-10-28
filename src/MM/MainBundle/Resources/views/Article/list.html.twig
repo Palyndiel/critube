@@ -1,0 +1,28 @@
+{# src/MM/MainBundle/Resources/views/Article/index.html.twig #}
+
+{% extends "MMCoreBundle::layout.html.twig" %}
+
+{% block title %}
+  Liste - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  <h2>Liste des articles</h2>
+
+  <section>
+    <div class="mini-posts">
+      {{ render(controller("MMMainBundle:Article:menu", {'limit': 10})) }}
+    </div>
+  </section>
+
+  <ul class="actions pagination">
+    {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+    {% for p in range(1, nbPages) %}
+      <li{% if p == page %} class="disabled"{% endif %}>
+        <a href="{{ path('mm_main_list_art', {'page': p}) }}" class="button big">{{ p }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

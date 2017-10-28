@@ -1,0 +1,93 @@
+# src/MM/MainBundle/Resources/config/routing.yml
+
+mm_main_home:
+    path:      /home/{page}
+    defaults:
+        _controller: MMMainBundle:Article:index
+        page: 1
+    requirements:
+        page: \d*
+    
+mm_main_view:
+    path:      /article/{id}
+    defaults:
+        _controller: MMMainBundle:Article:view
+    requirements:
+        id: \d+
+
+mm_main_add:
+    path:      /add
+    defaults:
+        _controller: MMMainBundle:Article:add
+
+mm_main_edit:
+    path:      /edit/{id}
+    defaults:
+        _controller: MMMainBundle:Article:edit
+    requirements:
+        id: \d+
+
+mm_main_delete:
+    path:      /delete/{id}
+    defaults:
+        _controller: MMMainBundle:Article:delete
+    requirements:
+        id: \d+
+
+mm_main_purge:
+    path:     /purge/{days}
+    defaults:
+        _controller: MMMainBundle:Article:purge
+    requirements:
+        days: \d+
+
+mm_main_paramconverter:
+  path: /test/{json}
+  defaults:
+    _controller: "MMMainBundle:Article:ParamConverter"
+
+mm_main_addlike:
+  path: /add/like
+  defaults: 
+       _controller: MMMainBundle:Article:like
+  requirements:
+    _method: POST
+    
+mm_main_getlikes:
+  path: /get/like
+  defaults: 
+       _controller: MMMainBundle:Article:getlike
+  requirements:
+    _method: POST
+    
+mm_main_removelike:
+  path: /remove/like
+  defaults: 
+       _controller: MMMainBundle:Article:dislike
+  requirements:
+    _method: POST
+    
+mm_main_list_art:
+  path: /list/{page}
+  defaults:
+    _controller: MMMainBundle:Article:list
+    page: 1
+  requirements:
+    page: \d*
+    
+mm_main_add_cat:
+  path: /cat/add
+  defaults: 
+    _controller: MMMainBundle:Category:addCat
+    
+mm_main_list_cat:
+  path: /cat/list
+  defaults:
+    _controller: MMMainBundle:Category:listCat
+    
+mm_main_list_by_cat:
+  path: /list/cat/{id}
+  defaults:
+    _controller: MMMainBundle:Article:listByCat
+  requirements:
+        id: \d+

@@ -1,0 +1,14 @@
+{# src/MM/mainBundle/Resources/views/Article/menu.html.twig #}
+
+{# Ce template n'hérite de personne, tout comme le template inclus avec {{ include() }}. #}
+
+  {% for article in listArticles %}
+    	<article class="mini-post">
+			<header>
+				<h3><a href="{{ path('mm_main_view', {'id': article.id}) }}">
+			        {{ article.title }}
+			      </a></h3>
+			</header>
+		</article>
+  {% endfor %}
+</ul>

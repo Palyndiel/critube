@@ -1,0 +1,106 @@
+{# src/MM/CoreBundle/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}Youtube Channel Reviews{% endblock %}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    {% block stylesheets %}
+      <link rel="stylesheet" href="{{ app.request.basepath }}/assets/css/main.css" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+    {% endblock %}
+  </head>
+
+  <body>
+  <div id="wrapper">
+    <header id="header">
+            <h1><a href="{{ path('mm_main_home') }}">Youtube Channel Reviews</a></h1>
+            <nav class="links">
+              <ul>
+                <li><a href="{{ path('mm_core_about') }}">A propos</a></li>
+                <li><a href="{{ path('mm_core_contact') }}">Contact</a></li>
+                <li><a href="{{ path('mm_main_list_art') }}">Liste des articles</a></li>
+                <li><a href="{{ path('mm_main_list_cat') }}">Liste par catégorie</a></li>
+              </ul>
+            </nav>
+            <nav class="main">
+              <ul>
+                <li class="search">
+                  <a class="fa-search" href="#search">Search</a>
+                  <form id="search" method="get" action="#">
+                    <input type="text" name="query" placeholder="Search" />
+                  </form>
+                </li>
+                <li class="menu">
+                  <a class="fa-bars" href="#menu">Menu</a>
+                </li>
+              </ul>
+            </nav>
+          </header>
+
+          <!-- Menu -->
+          <section id="menu">
+
+            <!-- Search -->
+              <section>
+                <!--<form class="search" method="get" action="#">
+                  <input type="text" name="query" placeholder="Search" />
+                </form>-->
+                {{ liip_search_box('', '', 'search') }}
+              </section>
+
+            <!-- Links -->
+              <section>
+                <ul class="links">
+                  <li><a href="{{ path('mm_main_home') }}">Accueil</a></li>
+                  <li><a href="{{ path('mm_core_about') }}">A propos</a></li>
+                  <li><a href="{{ path('mm_core_contact') }}">Contact</a></li>
+                  {% if is_granted('ROLE_AUTEUR') %}
+                  <li><a href="{{ path('mm_main_add') }}">Ajouter un article</a></li>
+                  <li><a href="{{ path('mm_main_add_cat') }}">Ajouter une catégorie</a></li>
+                  {% endif %}
+                </ul>
+              </section>
+
+            <!-- Actions -->
+              <section>
+                <ul class="actions vertical">
+                  <li>{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    Connecté en tant que {{ app.user.username }}
+                    <br>
+                    <a href="{{ path('fos_user_security_logout') }}" class="button big fit">Déconnexion</a>
+                    {% else %}
+                      <a href="{{ path('fos_user_security_login') }}" class="button big fit">Connexion</a>
+                      <br >
+                      <a href="{{ path('fos_user_registration_register') }}" class="button big fit">S'enregistrer</a>
+                    {% endif %}</li>
+                </ul>
+              </section>
+
+          </section>
+
+      <div id="main">
+        {% block body %}
+        {% endblock %}
+      </div>
+
+      {% block sidebar %}
+      {% endblock %}
+
+  </div>
+
+  {% block javascripts %}
+      <script src="{{ app.request.basepath }}/assets/js/jquery.min.js"></script>
+      <script src="{{ app.request.basepath }}/assets/js/skel.min.js"></script>
+      <script src="{{ app.request.basepath }}/assets/js/util.js"></script>
+      <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+      <script src="{{ app.request.basepath }}/assets/js/main.js"></script>
+      <!--<script src="{{ app.request.basepath }}/assets/js/angular.min.js"></script>-->
+      <!--<script src="{{ app.request.basepath }}/assets/js/like.js"></script>-->
+  {% endblock %}
+
+  </body>
+</html>

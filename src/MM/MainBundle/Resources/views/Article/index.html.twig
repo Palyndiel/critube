@@ -1,0 +1,115 @@
+{# src/MM/MainBundle/Resources/views/Article/index.html.twig #}
+
+{% extends "MMCoreBundle::layout.html.twig" %}
+
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  <h2>Liste des articles</h2>
+
+  {% for article in listArticles %}
+
+    <article class="post">
+                  <header>
+                    <div class="title">
+                      <h2><a href="{{ path('mm_main_view', {'id': article.id}) }}">{{ article.title }}</a></h2>
+                      <p>{{ article.resume }}</p>
+                    </div>
+                    <div class="meta">
+                       <time class="published" datetime="{{ article.date|date('d M Y') }}">{{ article.date|date('d M Y') }}</time>
+                      <a href="#" class="author"><span class="name">{{ article.author }}</span>
+                      {% if article.author.avatar is not null %}
+                  <img
+                  src="{{ asset(article.author.avatar.webPath) | imagine_filter('my_thumb') }}"
+                  alt="{{ article.author.avatar.alt }}"
+                  />
+               {% endif %}</a> 
+                    </div>
+                  </header>
+                  <a href="#" class="image featured">
+                {% if article.image is not null %}
+                  <img
+                  src="{{ asset(article.image.webPath) }}"
+                  alt="{{ article.image.alt }}"
+                  />
+               {% endif %}</a>
+                  <footer>
+                    <ul class="actions">
+                      <li><a href="{{ path('mm_main_view', {'id': article.id}) }}" class="button big">Continue Reading</a></li>
+                    </ul>
+                    <ul class="stats">
+                        {% if not article.categories.empty %}
+                      <li>
+                      {% for category in article.categories %}
+                        {{ category.name }}{% if not loop.last %} <em>,</em> {% endif %}
+                      {% endfor %}
+                      </li>
+                      {% endif %}
+                      {#<li><a href="#" class="icon fa-heart">{{ article.nbLikes }}</a></li>#}
+                      <li><a href="" class="icon fa-comment">{{ listThreads[loop.index0].numComments }}</a></li>
+                    </ul>
+                  </footer>
+                </article>
+  {% else %}
+      Pas (encore !) d'articles
+  {% endfor %}
+
+  <ul class="actions pagination">
+    {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+    {% for p in range(1, nbPages) %}
+      <li{% if p == page %} class="disabled"{% endif %}>
+        <a href="{{ path('mm_main_home', {'page': p}) }}" class="button big">{{ p }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
+
+{% block sidebar %}
+
+<!-- Sidebar -->
+          <section id="sidebar">
+
+            <!-- Intro -->
+              <section id="intro">
+                <!-- <a href="#" class="logo"><img src="images/logo.jpg" alt="" /></a> -->
+                <header>
+                  <h2>YCR</h2>
+                  <p>Youtube Channel Reviews</a></p>
+                </header>
+              </section>
+
+            <!-- Posts List -->
+              <section>
+                <div class="mini-posts">
+                  {{ render(controller("MMMainBundle:Article:menu", {'limit': 3})) }}
+                </div>
+              </section>
+
+            <!-- About -->
+              <section class="blurb">
+                <h2>A propos</h2>
+                <p>Youtube Channel Reviews est un site de critique de chaines Youtube.</p>
+                <ul class="actions">
+                  <li><a href="{{ path('mm_core_about') }}" class="button">En savoir plus</a></li>
+                </ul>
+              </section>
+
+            <!-- Footer -->
+              <section id="footer">
+                <ul class="icons">
+                  <li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
+                  <li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
+                  <li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
+                  <li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
+                  <li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
+                </ul>
+                <p class="copyright">&copy; Palyndiel Corp.</p>
+              </section>
+
+          </section>
+
+{% endblock %}
