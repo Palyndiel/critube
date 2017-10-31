@@ -6,11 +6,11 @@
     <title>{% block title %}Youtube Channel Reviews{% endblock %}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <!--[if lte IE 8]><script src="{{ app.request.basepath }}/assets/js/ie/html5shiv.js"></script><![endif]-->
     {% block stylesheets %}
       <link rel="stylesheet" href="{{ app.request.basepath }}/assets/css/main.css" />
-    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+    <!--[if lte IE 9]><link rel="stylesheet" href="{{ app.request.basepath }}/assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="{{ app.request.basepath }}/assets/css/ie8.css" /><![endif]-->
     {% endblock %}
   </head>
 
@@ -24,6 +24,7 @@
                 <li><a href="{{ path('mm_core_contact') }}">Contact</a></li>
                 <li><a href="{{ path('mm_main_list_art') }}">Liste des articles</a></li>
                 <li><a href="{{ path('mm_main_list_cat') }}">Liste par catégorie</a></li>
+                <li><a href="http://ycr.pingfiles.fr/#portfolio">Retour au Portfolio</a></li>
               </ul>
             </nav>
             <nav class="main">
@@ -96,7 +97,7 @@
       <script src="{{ app.request.basepath }}/assets/js/jquery.min.js"></script>
       <script src="{{ app.request.basepath }}/assets/js/skel.min.js"></script>
       <script src="{{ app.request.basepath }}/assets/js/util.js"></script>
-      <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+      <!--[if lte IE 8]><script src="{{ app.request.basepath }}/assets/js/ie/respond.min.js"></script><![endif]-->
       <script src="{{ app.request.basepath }}/assets/js/main.js"></script>
       <!--<script src="{{ app.request.basepath }}/assets/js/angular.min.js"></script>-->
       <!--<script src="{{ app.request.basepath }}/assets/js/like.js"></script>-->
