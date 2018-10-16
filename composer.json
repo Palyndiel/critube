@@ -31,7 +31,8 @@
         "coresphere/console-bundle": "~0.4",
         "friendsofsymfony/comment-bundle": "@dev",
         "liip/imagine-bundle": "@dev",
-        "liip/search-bundle": "dev-master"
+        "liip/search-bundle": "dev-master",
+        "ext-gd": "*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",
