@@ -16,3 +16,5 @@
 /web/bundles/
 .idea
 **/.DS_Store
+/web/uploads/*
+/web/media/*
